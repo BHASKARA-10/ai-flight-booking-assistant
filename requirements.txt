@@ -15,6 +15,11 @@ email-validator==2.1.0
 # AI & LLM
 
 langchain==0.0.335
+langchain-groq
+langchain-community
+faiss-cpu
+sentence-transformers
+pypdf
 langchain-google-genai==0.0.9
 openai==0.28.1
 google-generativeai==0.3.1
