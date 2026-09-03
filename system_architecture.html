@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Architecture</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .mermaid {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+    <!-- Load Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</head>
+<body>
+
+<div class="mermaid">
+graph TD
+    %% Step 1: User Request
+    User((User)) -- "1. Types Question" --> UI[Streamlit Frontend]
+    UI -- "2. API Request" --> FastAPI[FastAPI Backend]
+
+    %% Step 2: LangChain Brain
+    subgraph ReActLoop ["The ReAct Loop (LangChain)"]
+        FastAPI -- "3. Sends Prompt" --> Agent{"LangChain Agent<br>gpt-oss-120b"}
+        
+        %% Agent Decision Logic
+        Agent -- "4a. Needs Flight/Weather Data" --> Tools["External Tools<br>SerpAPI / Wttr.in"]
+        Agent -- "4b. Needs Company Rules" --> RAG[("FAISS Vector DB<br>RAG System")]
+        
+        %% The Loop Back
+        Tools -- "5a. Returns Raw JSON Data" --> Synthesize["LLM Synthesizes Answer"]
+        RAG -- "5b. Returns Exact PDF Text" --> Synthesize
+        
+        Agent -- "4c. General Chat" --> Synthesize
+    end
+
+    %% Step 3: Final Response
+    Synthesize -- "6. Generates Final Response" --> FastAPI
+    FastAPI -- "7. Sends Response" --> UI
+    UI -- "8. Displays to Screen" --> User
+    
+    %% Styling
+    classDef frontend fill:#1877F2,stroke:#115CBE,stroke-width:2px,color:white,font-weight:bold
+    classDef backend fill:#34495E,stroke:#2C3E50,stroke-width:2px,color:white,font-weight:bold
+    classDef agent fill:#8E44AD,stroke:#732D91,stroke-width:2px,color:white,font-weight:bold
+    classDef db fill:#F39C12,stroke:#D68910,stroke-width:2px,color:white,font-weight:bold
+    classDef tool fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:white,font-weight:bold
+
+    class UI frontend
+    class FastAPI backend
+    class Agent,Synthesize agent
+    class RAG db
+    class Tools tool
+</div>
+
+</body>
+</html>

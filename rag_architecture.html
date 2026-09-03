@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG Architecture</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .mermaid {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+    <!-- Load Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</head>
+<body>
+
+<div class="mermaid">
+graph TD
+    %% Step 1: Ingestion
+    subgraph Step1 ["1. Data Ingestion & Splitting"]
+        PDF["Company_Policy.pdf"] -- "PyPDFLoader" --> Loader["Document Loader"]
+        Loader -- "RecursiveTextSplitter" --> Chunks["Text Chunks<br>e.g., 500 words each"]
+    end
+
+    %% Step 2: Embedding & Storage
+    subgraph Step2 ["2. Mathematical Embedding & Storage"]
+        Chunks -- "Pass to Model" --> EmbedModel["HuggingFace Embeddings<br>'all-MiniLM-L6-v2'"]
+        EmbedModel -- "Converts to 384D Tensors" --> Tensors["Mathematical Vectors<br>e.g., 0.012, -0.45, ..."]
+        Tensors -- "Saves Locally" --> FAISS[("FAISS Vector Database<br>Index Saved to Disk")]
+    end
+
+    %% Step 3: Retrieval (When user asks a question)
+    subgraph Step3 ["3. User Retrieval & Similarity Search"]
+        UserQ["User Question:<br>What is the baggage limit?"] -- "Pass to Model" --> EmbedQuery["HuggingFace Embeddings"]
+        EmbedQuery -- "Converts to 384D Vector" --> QueryVector["Question Vector"]
+        QueryVector -- "Cosine Similarity Search" --> FAISS
+    end
+
+    %% Step 4: Final Injection
+    subgraph Step4 ["4. Context Injection"]
+        FAISS -- "Finds Closest Matching Chunk" --> BestChunk["Top Retrieved Document Chunk"]
+        BestChunk -- "Injects Text as Context" --> LLM["LangChain Agent / LLM"]
+        LLM -- "Generates Final Answer" --> Answer["Accurate, Hallucination-Free Answer"]
+    end
+
+    %% Styling
+    classDef step1 fill:#2C3E50,stroke:#1A252F,stroke-width:2px,color:white
+    classDef step2 fill:#8E44AD,stroke:#732D91,stroke-width:2px,color:white
+    classDef step3 fill:#2980B9,stroke:#1C5980,stroke-width:2px,color:white
+    classDef step4 fill:#27AE60,stroke:#1E8449,stroke-width:2px,color:white
+
+    class PDF,Loader,Chunks step1
+    class EmbedModel,Tensors,FAISS step2
+    class UserQ,EmbedQuery,QueryVector step3
+    class BestChunk,LLM,Answer step4
+</div>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>FAISS Vector Database View</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 40px; }
+            h1 { color: #2c3e50; text-align: center; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: white; }
+            th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #34495e; color: white; position: sticky; top: 0; }
+            tr:hover { background-color: #f5f5f5; }
+            .tensor { font-family: 'Courier New', Courier, monospace; color: #e74c3c; font-size: 0.9em; background: #fdf2f0; padding: 5px; border-radius: 4px; word-break: break-all; }
+            .text-content { font-size: 0.95em; color: #333; line-height: 1.5; }
+        </style>
+    </head>
+    <body>
+        <h1>FAISS Vector Database Explorer</h1>
+        <p style="text-align:center; color:#7f8c8d;">This is a visual representation of the chunks and mathematical tensors currently stored in your AI's memory.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 45%;">Document Text Chunk (What humans read)</th>
+                    <th style="width: 50%;">Mathematical Tensor Vector (What the AI reads)</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td>0</td>
+                    <td class="text-content">AI Flight Assistant - Master Knowledge Base V2<br>1. Comprehensive Baggage Policies<br>- Economy Class: 1 personal item (laptop bag/purse), 1 carry-on (up to 7kg), 1 checked bag (up to 15kg).<br>- Premium Economy: 1 personal item, 1 carry-on (up to 10kg), 2 checked bags (up to 20kg each).<br>- Business/First Class: 1 personal item, 2 carry-on bags (up to 15kg total), 2 checked bags (up to 32kg each).<br>- Excess Baggage Fees: INR 2000 per extra 5kg block purchased online. INR 3000 if purchased at the airport</td>
+                    <td class="tensor">[-0.0274, 0.0136, -0.0510, -0.0102, 0.0653 ...... 0.0384, 0.0269, -0.0464, -0.1173, -0.0121] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>1</td>
+                    <td class="text-content">counter.<br>- Infant Baggage: Infants traveling on lap are allowed 1 diaper bag (up to 5kg) and 1 fully collapsible stroller.<br>- Sporting Equipment: Golf clubs, surfboards, bicycles, and ski equipment are charged a flat handling fee of<br>INR 3500 per flight.<br>- Musical Instruments: Small instruments (violins/guitars) can be carried in the cabin. Cellos require<br>purchasing an extra seat.<br>2. Prohibited & Restricted Items (Security)</td>
+                    <td class="tensor">[0.0331, 0.0010, -0.0648, 0.0140, -0.0379 ...... 0.0763, -0.0772, -0.0437, -0.0074, -0.0371] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>2</td>
+                    <td class="text-content">2. Prohibited & Restricted Items (Security)<br>- Liquids Rule: All liquids in carry-on bags must be in containers of 100ml or less, placed in a single,<br>transparent, resealable plastic bag.<br>- Power Banks & Lithium Batteries: STRICTLY PROHIBITED in checked luggage. Must be carried in cabin<br>baggage only. Maximum capacity allowed is 160Wh.<br>- Hoverboards & E-Scooters: Completely banned on all flights due to fire risks.</td>
+                    <td class="tensor">[0.0352, 0.0329, -0.0902, -0.0317, 0.1285 ...... -0.0321, 0.0698, 0.0272, 0.0234, -0.0050] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td class="text-content">- Duty-Free Alcohol: Maximum of 5 liters per passenger in retail packaging, containing between 24% and<br>70% alcohol by volume.<br>3. Cancellation, Modifications, & Refunds<br>- 24-Hour Grace Period: Full 100% refund to the original payment method if canceled within 24 hours of<br>booking.<br>- Standard Cancellation (More than 7 days prior): INR 1500 cancellation fee per passenger. Remaining<br>balance refunded in 5-7 business days.</td>
+                    <td class="tensor">[0.0410, 0.0335, 0.0270, 0.0005, 0.0348 ...... -0.0488, -0.0038, 0.0198, 0.0015, -0.0421] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>4</td>
+                    <td class="text-content">balance refunded in 5-7 business days.<br>- Late Cancellation (Less than 7 days prior): Non-refundable. Passenger receives a travel-credit voucher for<br>50% of the base fare, valid for 6 months.<br>- No-Show Policy: Failure to board without prior cancellation results in 100% ticket forfeiture. No refunds or<br>credits.<br>- Flight Modifications: Date or route changes allowed up to 48 hours before departure. Modification fee is INR<br>1000 plus any fare difference.<br>4. Traveling with Pets</td>
+                    <td class="tensor">[-0.0048, -0.0104, 0.0837, 0.0345, -0.0079 ...... -0.0229, -0.0117, -0.0150, -0.0763, -0.0296] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>5</td>
+                    <td class="text-content">- In-Cabin Pets: Only small dogs, cats, and household birds (under 8kg total with carrier) are allowed in the<br>cabin. Fee: INR 2500 per segment.<br>- Cargo Pets: Larger pets must travel in the climate-controlled cargo hold. Fee: INR 5000. Temperature<br>restrictions apply during summer.<br>- Brachycephalic (Snub-nosed) Breeds: Pugs, Bulldogs, Boxers, and Persian cats are STRICTLY<br>PROHIBITED in the cargo hold due to severe respiratory risks at high altitudes.</td>
+                    <td class="tensor">[0.0967, -0.0123, -0.0142, 0.0556, 0.0150 ...... 0.0085, -0.0406, 0.0336, -0.0736, 0.0192] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>6</td>
+                    <td class="text-content">- Service Animals: Certified guide dogs and emotional support animals travel free of charge in the cabin,<br>provided proper documentation is submitted 48 hours in advance.<br>5. Special Assistance & Medical Policies<br>- Wheelchair Assistance: Provided completely free of charge. Must be requested at least 48 hours prior to<br>departure.<br>- Pregnancy Policy: Expectant mothers can fly safely up to 28 weeks without documentation. Between 28-36</td>
+                    <td class="tensor">[0.0262, -0.0221, 0.0633, 0.0935, 0.0576 ...... 0.0777, -0.0030, 0.0002, -0.0174, -0.0325] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>7</td>
+                    <td class="text-content">weeks, a certified medical clearance certificate from a doctor is mandatory. Flying after 36 weeks is strictly<br>prohibited.<br>- Unaccompanied Minors (UMNR): Mandatory for children aged 5-11 traveling alone. Fee is INR 3000 per<br>flight. Airline staff will escort the child from check-in to the receiving guardian.<br>- Dietary Meals: Vegan, Vegetarian, Gluten-Free, Halal, and Kosher meals are available on flights exceeding<br>3 hours. Must be requested 24 hours prior to departure.</td>
+                    <td class="tensor">[0.0838, 0.0370, -0.0520, 0.0272, 0.0125 ...... 0.0346, 0.0043, -0.0196, -0.0240, -0.0398] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>8</td>
+                    <td class="text-content">6. Travel Documentation & Visas<br>- Domestic Travel: Valid government-issued photo ID (Aadhaar, PAN, Driving License, or Voter ID) is<br>mandatory.<br>- International Travel: Passport must be valid for a minimum of 6 months beyond the date of the return flight.<br>- Schengen Visas: For travel to Europe, travelers must obtain the visa from the country where they will spend<br>the majority of their time.</td>
+                    <td class="tensor">[-0.0060, -0.0074, -0.0181, -0.0703, -0.0066 ...... -0.0060, 0.0728, 0.1172, 0.0090, -0.0134] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>9</td>
+                    <td class="text-content">the majority of their time.<br>- Transit Visas: Passengers flying through the United States or Canada require a transit visa even if they do<br>not leave the airport.<br>7. Corporate Travel & Reimbursement Policy (Company Specific)<br>- Mandatory Booking Channel: All corporate travel MUST be booked exclusively through the AI Flight<br>Assistant portal.<br>- Domestic Ticket Caps: Maximum allowed spend for domestic flights is INR 15,000.</td>
+                    <td class="tensor">[0.1246, -0.1518, 0.0160, -0.0430, -0.0134 ...... -0.0386, 0.0327, 0.0432, 0.0581, -0.0658] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>10</td>
+                    <td class="text-content">- International Ticket Caps: Maximum allowed spend for international flights is INR 80,000.<br>- Class Approvals: All flights under 6 hours must be Economy Class. Business Class is strictly limited to<br>flights exceeding 6 hours AND requires direct VP (Vice President) written approval.<br>- Executive Overrides: C-Level Executives (CEO, CFO, CTO) are exempt from price caps and class<br>restrictions.</td>
+                    <td class="tensor">[0.0433, -0.0335, -0.0356, -0.0185, 0.0526 ...... 0.0066, -0.0240, -0.0652, -0.0682, -0.0109] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>11</td>
+                    <td class="text-content">- Per Diem Rates: Employees receive a daily allowance of INR 2500 for domestic travel and USD $100 for<br>international travel to cover meals and incidentals.<br>- Non-Reimbursable Expenses: In-flight Wi-Fi, alcohol, excess baggage for personal items, and cancellation<br>fees due to personal reasons will NOT be reimbursed.<br>8. Loyalty Program (SkyRewards)<br>- Silver Tier: Achieved at 25,000 miles. Benefits: 10% bonus miles, priority boarding, and 5kg extra baggage.</td>
+                    <td class="tensor">[0.0067, -0.0004, -0.0456, 0.0308, 0.0339 ...... 0.0590, -0.0056, -0.1211, -0.0693, -0.0460] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>12</td>
+                    <td class="text-content">- Gold Tier: Achieved at 50,000 miles. Benefits: 25% bonus miles, free lounge access for member, and 10kg<br>extra baggage.<br>- Platinum Tier: Achieved at 100,000 miles. Benefits: 50% bonus miles, free lounge access for member + 1<br>guest, two free upgrades per year, and 20kg extra baggage.<br>9. Flight Delays & Overbooking Compensation<br>- Delays 2-4 Hours: Passengers receive free meal vouchers at the airport.</td>
+                    <td class="tensor">[0.0123, 0.0508, -0.0348, 0.0480, 0.0037 ...... 0.0312, -0.0051, -0.1149, -0.0480, -0.0453] (Total: 384 dimensions)</td>
+                </tr>
+        
+                <tr>
+                    <td>13</td>
+                    <td class="text-content">- Delays Over 4 Hours: Passengers are entitled to a full refund or rebooking on the next available flight, plus<br>hotel accommodation if overnight.<br>- Involuntary Denied Boarding (Overbooking): If bumped from a flight, passengers receive a direct cash<br>compensation of INR 10,000 plus a confirmed seat on the next flight.</td>
+                    <td class="tensor">[-0.0205, -0.0522, 0.0087, 0.0601, 0.0223 ...... -0.0003, -0.0473, -0.1005, -0.1124, -0.0062] (Total: 384 dimensions)</td>
+                </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

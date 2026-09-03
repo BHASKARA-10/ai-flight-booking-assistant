@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 API_URL = "http://127.0.0.1:8000"
 
 st.set_page_config(
-    page_title="AI Flight Assistant",
+    page_title="Vyoma",
     page_icon="✈️",
     layout="wide"
 )
@@ -141,38 +141,42 @@ div[data-testid="InputInstructions"] {
 
 /* Primary buttons (like Book Now) */
 button[kind="primary"] {
-    background: linear-gradient(135deg, #10A37F, #0E906F) !important;
+    background: #0B0B2A !important; /* Deep dark purple/black from the image */
     color: white !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    padding: 10px 24px !important;
 }
 button[kind="primary"]:hover {
-    box-shadow: 0 4px 15px rgba(16, 163, 127, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(11, 11, 42, 0.4) !important;
+    background: #1A1A40 !important;
 }
 
 /* Inputs */
 .stTextInput > div > div > input, .stNumberInput > div > div > input {
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #0F172A !important;
     border-radius: 8px !important;
     padding: 12px 14px !important;
     font-size: 1rem !important;
     transition: all 0.3s ease !important;
 }
 .stTextInput > div > div > input:focus {
-    border-color: #00C9FF !important;
-    box-shadow: 0 0 10px rgba(0, 201, 255, 0.2) !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-color: #6366F1 !important;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2) !important;
+    background-color: #ffffff !important;
 }
 
 /* Labels */
 .stTextInput label, .stNumberInput label {
-    color: #B4B4B4 !important;
+    color: #94A3B8 !important;
     font-weight: 500 !important;
 }
 
 /* Tabs Segmented Control */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
     border-radius: 50px !important;
     padding: 6px !important;
     gap: 0 !important;
@@ -185,76 +189,116 @@ button[kind="primary"]:hover {
     border-radius: 50px !important;
     padding: 16px 0 !important;
     margin: 0 !important;
-    color: #FFFFFF !important;
+    color: #E2E8F0 !important;
     font-size: 1.4rem !important;
     font-weight: 600 !important;
     border: none !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: transparent !important;
     transition: all 0.3s ease !important;
 }
 .stTabs [aria-selected="true"] {
-    background: rgba(0, 201, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 15px rgba(0, 201, 255, 0.4) !important;
+    box-shadow: none !important;
     border-bottom: none !important;
-    border: 1px solid rgba(0, 201, 255, 0.5) !important;
+    border: none !important;
 }
 
-/* Premium Floating Flight Cards */
+/* Aeroluxe-style White Flight Cards */
 .flight-card {
-    background: rgba(10, 25, 47, 0.6) !important;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(100, 255, 218, 0.2);
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 25px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: #ffffff !important;
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    color: #0F172A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .flight-card:hover {
-    border-color: #64FFDA;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
-.flight-info {
-    margin-bottom: 12px;
+.fc-left {
+    flex: 1;
 }
-.flight-title {
-    font-size: 1.3rem;
+.fc-airline {
+    font-size: 1.1rem;
     font-weight: 700;
-    color: #E2E8F0;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
+    color: #0F172A;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.flight-title span {
-    color: #64FFDA;
-    font-size: 1rem;
+.fc-airline-span {
+    color: #64748B;
+    font-size: 0.9rem;
     font-weight: 500;
+    text-transform: none;
 }
-.flight-snippet {
-    font-size: 1.05rem;
+.fc-route-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 400px;
+}
+.fc-port {
+    text-align: center;
+    min-width: 80px;
+}
+.fc-code {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0F172A;
+}
+.fc-time {
+    font-size: 0.85rem;
+    color: #64748B;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+.fc-divider {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color: #CBD5E1;
+}
+.fc-line {
+    flex: 1;
+    height: 1px;
+    background-color: #CBD5E1;
+    position: relative;
+}
+.fc-plane {
+    margin: 0 10px;
+    font-size: 1.2rem;
     color: #94A3B8;
-    margin-bottom: 6px;
 }
-.flight-price {
+.fc-right {
+    text-align: right;
+    min-width: 150px;
+}
+.fc-price {
     font-size: 1.8rem;
     font-weight: 800;
-    color: #38BDF8;
-    text-align: right;
-    margin-top: -40px;
-    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    color: #0F172A;
+    margin-bottom: 10px;
 }
 .weather-badge, .prob-badge {
     display: inline-block;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #38BDF8;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    background: #F1F5F9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin-right: 10px;
-    margin-bottom: 20px;
+    margin-left: 8px;
+    margin-bottom: 10px;
 }
 
 /* Chat Input Global Base */
@@ -340,36 +384,78 @@ def register_user(username, email, password):
 
 # If not logged in, show Auth Page
 if not st.session_state.logged_in:
+    import os
+    import base64
+    
+    # Load from the new assets folder!
+    file_path = os.path.join(os.path.dirname(__file__), "assets", "bg.png")
+    with open(file_path, 'rb') as f:
+        bg_base64 = base64.b64encode(f.read()).decode()
+    bg_image_css = f'url("data:image/png;base64,{bg_base64}")'
+
+    st.markdown(f"""
+    <style>
+    .stApp {{
+        background-color: #0b1120 !important;
+        background-image: none !important;
+    }}
+    .stApp::before {{
+        content: "";
+        position: fixed;
+        top: 0; 
+        left: 0;
+        width: 55%; 
+        height: 100vh;
+        background-image: {bg_image_css};
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }}
+    [data-testid="stAppViewContainer"] {{
+        background: transparent !important;
+        z-index: 1;
+        position: relative;
+    }}
+    
+    @media (max-width: 768px) {{
+        .stApp::before {{
+            display: none;
+        }}
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.markdown("""
     <style>
-    @keyframes auroraBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    .stApp {
-        background: linear-gradient(-45deg, #0f172a, #312e81, #1e1b4b, #020617) !important;
-        background-size: 400% 400% !important;
-        animation: auroraBG 15s ease infinite !important;
+    /* Sleek Premium Dark Card for Login Form */
+    div[data-testid="stForm"] {
+        background: rgba(20, 25, 40, 0.8) !important;
+        backdrop-filter: blur(15px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 16px !important;
+        padding: 2.5rem !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
     }
     
-    /* Glassmorphism for Login Form */
-    div[data-testid="stForm"] {
-        background: rgba(255, 255, 255, 0.03) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 20px !important;
-        padding: 3rem 2rem !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+    .premium-title {
+        font-size: 4rem !important;
+        font-weight: 800 !important;
+        color: #F8FAFC !important;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+        text-align: left !important;
+        line-height: 1.1 !important;
+        letter-spacing: -1.5px !important;
     }
     </style>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns([1, 2, 1])
+    st.markdown('<div style="height: 4vh;"></div>', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([5.8, 3.5, 0.7])
+    
     with col2:
-        st.markdown('<div class="premium-title" style="position:relative; z-index:10;">✈️ AI Flight Assistant</div>', unsafe_allow_html=True)
-        st.markdown('<div class="premium-subtitle">Your intelligent travel companion</div>', unsafe_allow_html=True)
+        st.markdown('<div class="premium-title">VYOMA</div>', unsafe_allow_html=True)
+        st.markdown('<div style="height: 2vh;"></div>', unsafe_allow_html=True)
         
         tab1, tab2 = st.tabs(["Secure Login", "Create Account"])
         
@@ -377,7 +463,7 @@ if not st.session_state.logged_in:
             with st.form("login_form"):
                 l_email = st.text_input("Email Address")
                 l_password = st.text_input("Password", type="password")
-                submit_login = st.form_submit_button("✈️", use_container_width=True)
+                submit_login = st.form_submit_button("Login to Vyoma ✈️", use_container_width=True)
                 if submit_login:
                     if not re.match(r"[^@]+@[^@]+\.[^@]+", l_email):
                         st.error("Please enter a valid email address.")
@@ -392,7 +478,7 @@ if not st.session_state.logged_in:
                 r_username = st.text_input("Username")
                 r_email = st.text_input("Email Address")
                 r_password = st.text_input("Password", type="password")
-                submit_register = st.form_submit_button("✈️", use_container_width=True)
+                submit_register = st.form_submit_button("Join Vyoma ✈️", use_container_width=True)
                 if submit_register:
                     if not re.match(r"[^@]+@[^@]+\.[^@]+", r_email):
                         st.error("Please enter a valid email address.")
@@ -405,11 +491,20 @@ if not st.session_state.logged_in:
 
 # If logged in, show ChatGPT-style UI
 else:
+    import base64
+    chk_file_path = os.path.join(os.path.dirname(__file__), "assets", "checkout_bg.png")
+    try:
+        with open(chk_file_path, 'rb') as f:
+            chk_bg_base64 = base64.b64encode(f.read()).decode()
+        chk_bg_css = f'url("data:image/png;base64,{chk_bg_base64}")'
+    except Exception as e:
+        chk_bg_css = "none"
+
     # SIDEBAR
     with st.sidebar:
         top_container = st.container()
         with top_container:
-            st.title("✈️ AI Assistant")
+            st.title("✈️ Vyoma")
             
             if st.button("➕ New Conversation", use_container_width=True):
                 st.session_state.session_id = str(uuid.uuid4())
@@ -519,26 +614,59 @@ else:
                             prob_html = f"<div class='prob-badge'>⏱️ {item.get('on_time_probability', 'N/A')}</div>" if item.get('on_time_probability') else ""
                             try:
                                 from datetime import datetime as dt
-                                f_date = dt.strptime(item.get('date', ''), "%Y-%m-%d").strftime("%d-%m-%Y")
+                                f_date = dt.strptime(item.get('date', ''), "%Y-%m-%d").strftime("%d %b")
                             except:
                                 f_date = item.get('date', '')
                                 
+                            # Try to extract route codes
+                            route_str = item.get('route', 'DEP to ARR')
+                            parts = route_str.split(' to ')
+                            dep_code = parts[0][:3].upper() if len(parts) > 0 else "DEP"
+                            arr_code = parts[1][:3].upper() if len(parts) > 1 else "ARR"
+                            
+                            snippet = item.get('snippet', '')
+                            dep_time = f_date
+                            arr_time = "Arrives"
+                            
+                            if " - " in snippet:
+                                try:
+                                    time_part = snippet.split(' • ')[0] # "03:00 PM - 04:20 PM"
+                                    times = time_part.split(' - ')
+                                    if len(times) == 2:
+                                        dep_time = times[0]
+                                        arr_time = times[1]
+                                except:
+                                    pass
+                            
                             st.markdown(f"""
                             <div class='flight-card'>
-                              {weather_html}
-                              {prob_html}
-                              <div class='flight-info'>
-                                <div class='flight-title'>
-                                  {item.get('airline', '')} <span>({item.get('flight_number', 'N/A')})</span> | {item.get('route', '')}
+                                <div class='fc-left'>
+                                    <div class='fc-airline'>✈️ {item.get('airline', '')} <span class='fc-airline-span'>{item.get('flight_number', 'N/A')} &nbsp;•&nbsp; {route_str}</span></div>
+                                    <div class='fc-route-container'>
+                                        <div class='fc-port'>
+                                            <div class='fc-code'>{dep_code}</div>
+                                            <div class='fc-time'>{dep_time}</div>
+                                        </div>
+                                        <div class='fc-divider'>
+                                            <div class='fc-line'></div>
+                                            <div class='fc-plane'>✈</div>
+                                            <div class='fc-line'></div>
+                                        </div>
+                                        <div class='fc-port'>
+                                            <div class='fc-code'>{arr_code}</div>
+                                            <div class='fc-time'>{arr_time}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class='flight-snippet'>📅 Date: {f_date}</div>
-                                <div class='flight-snippet'>{item.get('snippet', '')}</div>
-                              </div>
-                              <div class='flight-price'>{item.get('price', '')}</div>
+                                <div class='fc-right'>
+                                    <div class='fc-price'>{item.get('price', '')}</div>
+                                    <div style='color: #64748B; font-size: 0.9rem; margin-bottom: 10px; font-weight: 500;'>{snippet}</div>
+                                    <div>{weather_html}{prob_html}</div>
+                                </div>
                             </div>
                             """, unsafe_allow_html=True)
                             
-                            if st.button(f"Book {item.get('airline', '')} {item.get('flight_number', '')}", key=f"book_msg{msg_idx}_idx{i}_{item.get('flight_number', '')}", type="primary"):
+                            if st.button(f"Booking Now", key=f"book_msg{msg_idx}_idx{i}_{item.get('flight_number', '')}", type="primary"):
                                 st.session_state.selected_flight = item
                                 st.session_state.current_page = "checkout"
                                 st.rerun()
@@ -618,16 +746,16 @@ else:
         """, unsafe_allow_html=True)
         
         st.title("How can I help you travel today?")
-
+        
         for idx, message in enumerate(st.session_state.messages):
             avatar = "✈️" if message["role"] == "assistant" else "🧑‍💻"
             with st.chat_message(message["role"], avatar=avatar):
                 render_chat_message(message["content"], is_history=True, msg_idx=idx)
 
-
-
         prompt = st.chat_input("Ask me anything...")
         final_prompt = prompt
+
+            
         if final_prompt:
             st.session_state.messages.append({"role": "user", "content": final_prompt})
             with st.chat_message("user", avatar="🧑‍💻"):
@@ -655,16 +783,122 @@ else:
                         st.error(f"Backend error: {e}")
 
     elif st.session_state.current_page == "checkout":
-        st.title("Secure Checkout")
-        if st.button("← Back to Chat"):
-            st.session_state.current_page = "chat"
-            st.rerun()
+        st.markdown("""
+        <style>
+        /* Simple Light Theme Background */
+        .stApp, .main, [data-testid="stAppViewContainer"] {
+            background: #F8FAFC !important;
+            background-image: none !important;
+        }
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        
+        /* Force sidebar to be solid dark so it doesn't become white/transparent */
+        [data-testid="stSidebar"] {
+            background-color: #0b1120 !important;
+            border-right: 1px solid #1e293b !important;
+        }
+        
+        /* Default all text to dark for the main page */
+        .stMarkdown, p, h1, h2, h3, label, span {
+            color: #0F172A !important;
+        }
+        
+        /* Protect the sidebar text (keep it white) */
+        [data-testid="stSidebar"] .stMarkdown, 
+        [data-testid="stSidebar"] p, 
+        [data-testid="stSidebar"] h1, 
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3, 
+        [data-testid="stSidebar"] span {
+            color: #F8FAFC !important;
+        }
+        
+        div[data-testid="stForm"] {
+            background: #FFFFFF !important;
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 2.5rem !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+        }
+        
+        .stTextInput > div > div > input, 
+        .stNumberInput > div > div > input, 
+        .stSelectbox > div > div > div {
+            background-color: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            color: #0F172A !important;
+            border-radius: 6px !important;
+        }
+        
+        .stTextInput > div > div > input:focus {
+            border-color: #008cff !important;
+            box-shadow: 0 0 0 2px rgba(0,140,255,0.2) !important;
+        }
+        
+        /* Top Header Buttons (Back Button) */
+        button[kind="secondary"] {
+            background: #FFFFFF !important;
+            color: #0F172A !important;
+            border: 1px solid #CBD5E1 !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            padding: 8px 16px !important;
+            transition: all 0.2s;
+        }
+        
+        button[kind="secondary"]:hover {
+            background: #F1F5F9 !important;
+            border-color: #94A3B8 !important;
+            color: #0F172A !important;
+        }
+        
+        /* Main Action Button (MMT Blue Gradient) */
+        button[kind="primary"] {
+            background: linear-gradient(90deg, #008cff 0%, #005bf7 100%) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+            padding: 12px 24px !important;
+            box-shadow: 0 4px 15px rgba(0, 140, 255, 0.3) !important;
+        }
+        
+        button[kind="primary"]:hover {
+            box-shadow: 0 6px 20px rgba(0, 140, 255, 0.5) !important;
+            transform: translateY(-1px);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        col_title, col_btn = st.columns([8, 2])
+        with col_title:
+            st.markdown("<h1 style='color: #0F172A; font-weight: 800; margin-bottom: 0; letter-spacing: -0.5px;'>🔒 Secure Checkout</h1>", unsafe_allow_html=True)
+        with col_btn:
+            if st.button("← Back to Chat"):
+                st.session_state.current_page = "chat"
+                st.rerun()
             
         flight = st.session_state.selected_flight
-        st.markdown(f"### ✈️ {flight.get('airline')} Flight {flight.get('flight_number')}")
-        st.markdown(f"**Route**: {flight.get('route')}")
-        st.markdown(f"**Date**: {flight.get('date')}")
-        st.markdown(f"**Time**: {flight.get('snippet')}")
+        st.markdown(f"""
+        <div style="background: #FFFFFF; padding: 24px; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-top: 20px;">
+            <h3 style="margin-top: 0; color: #0F172A; display: flex; align-items: center; gap: 10px; font-weight: 700;">
+                <span style="font-size: 1.5rem;">✈️</span> 
+                {flight.get('airline')} 
+                <span style="font-size: 1rem; color: #64748B; font-weight: 500;">({flight.get('flight_number')})</span>
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
+                <p style="margin: 0; color: #334155; font-size: 1.1rem;"><strong>Route:</strong> {flight.get('route')}</p>
+                <p style="margin: 0; color: #334155; font-size: 1.1rem;"><strong>Date:</strong> {flight.get('date')}</p>
+                <div style="background: #F8FAFC; padding: 14px; border-radius: 8px; margin-top: 10px; border: 1px solid #E2E8F0;">
+                    <p style="margin: 0; color: #0F172A; font-weight: 600;">{flight.get('snippet')}</p>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
         
         # Strip ₹ and commas for numeric parsing
         price_str = str(flight.get("price", "5000")).replace("₹", "").replace(",", "").strip()
@@ -675,25 +909,30 @@ else:
             
         num_passengers = st.number_input("Number of Passengers", min_value=1, max_value=9, value=1)
         total_amount = amount * num_passengers
-        st.markdown(f"**Total Price for {num_passengers} passenger(s)**: ₹{total_amount}")
+        st.markdown(f"<h3 style='color: #0F172A; text-align: right; font-weight: 700;'>Total Price: <span style='color: #2563EB;'>₹{total_amount}</span></h3>", unsafe_allow_html=True)
         st.markdown("---")
         
         with st.form("checkout_form"):
-            st.subheader("Passenger Details")
+            st.markdown("<h3 style='color: #0F172A; margin-top: 0; margin-bottom: 20px; font-weight: 700;'>📋 Passenger Details</h3>", unsafe_allow_html=True)
             passengers_data = []
             for i in range(num_passengers):
-                st.markdown(f"**Passenger {i+1}**")
-                col1, col2 = st.columns(2)
+                st.markdown(f"<div style='background: #F1F5F9; padding: 8px 12px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; color: #334155;'>👤 Passenger {i+1}</div>", unsafe_allow_html=True)
+                col1, col2, col3, col4 = st.columns([3, 3, 2, 2])
                 with col1:
                     name = st.text_input("Full Name", key=f"name_{i}")
-                    email = st.text_input("Email Address", key=f"email_{i}")
                 with col2:
+                    email = st.text_input("Email Address", key=f"email_{i}")
+                with col3:
                     phone = st.text_input("Phone Number", key=f"phone_{i}")
+                with col4:
                     age = st.number_input("Age", min_value=0, max_value=120, value=0, key=f"age_{i}")
-                    seat_pref = st.selectbox("Seat Preference", ["No Preference", "Window", "Aisle", "Middle", "Extra Legroom"], key=f"seat_{i}")
+                
+                seat_pref = st.selectbox("Seat Preference", ["No Preference", "Window", "Aisle", "Middle", "Extra Legroom"], key=f"seat_{i}")
+                st.markdown("<hr style='border-top: 1px dashed #CBD5E1; margin: 20px 0;'>", unsafe_allow_html=True)
                 passengers_data.append({"name": name, "email": email, "phone": phone, "age": age, "seat_preference": seat_pref})
                 
-            submit_btn = st.form_submit_button("Proceed to Payment")
+
+            submit_btn = st.form_submit_button("💳 Proceed to Secure Payment", type="primary", use_container_width=True)
             
         if submit_btn:
             if not passengers_data[0]["name"] or not passengers_data[0]["email"]:
@@ -718,8 +957,94 @@ else:
                         st.error(f"Error creating order: {e}")
                         
     elif st.session_state.current_page == "payment":
-        st.title("💳 Payment Gateway")
-        st.markdown("Please securely complete your payment to confirm your booking.")
+        st.markdown("""
+        <style>
+        /* Simple Light Theme Background */
+        .stApp, .main, [data-testid="stAppViewContainer"] {
+            background: #F8FAFC !important;
+            background-image: none !important;
+        }
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        
+        /* Force sidebar to be solid dark so it doesn't become white/transparent */
+        [data-testid="stSidebar"] {
+            background-color: #0b1120 !important;
+            border-right: 1px solid #1e293b !important;
+        }
+        
+        /* Default all text to dark for the main page */
+        .stMarkdown, p, h1, h2, h3, label, span {
+            color: #0F172A !important;
+        }
+        
+        /* Protect the sidebar text (keep it white) */
+        [data-testid="stSidebar"] .stMarkdown, 
+        [data-testid="stSidebar"] p, 
+        [data-testid="stSidebar"] h1, 
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3, 
+        [data-testid="stSidebar"] span {
+            color: #F8FAFC !important;
+        }
+        
+        /* Top Header Buttons (Cancel Button) */
+        button[kind="secondary"] {
+            background: #FFFFFF !important;
+            color: #0F172A !important;
+            border: 1px solid #CBD5E1 !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            padding: 8px 16px !important;
+            transition: all 0.2s;
+        }
+        
+        button[kind="secondary"]:hover {
+            background: #F1F5F9 !important;
+            border-color: #94A3B8 !important;
+            color: #0F172A !important;
+        }
+        
+        /* Main Action Button (MMT Blue Gradient) */
+        button[kind="primary"] {
+            background: linear-gradient(90deg, #008cff 0%, #005bf7 100%) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+            padding: 12px 24px !important;
+            box-shadow: 0 4px 15px rgba(0, 140, 255, 0.3) !important;
+        }
+        
+        button[kind="primary"]:hover {
+            box-shadow: 0 6px 20px rgba(0, 140, 255, 0.5) !important;
+            transform: translateY(-1px);
+        }
+        /* Custom Info/Success boxes for light theme */
+        div[data-testid="stInfo"] {
+            background-color: #EFF6FF !important;
+            color: #1E3A8A !important;
+            border: 1px solid #BFDBFE !important;
+        }
+        div[data-testid="stSuccess"] {
+            background-color: #F0FDF4 !important;
+            color: #166534 !important;
+            border: 1px solid #BBF7D0 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        col_title, col_btn = st.columns([8, 2])
+        with col_title:
+            st.markdown("<h1 style='color: #0F172A; font-weight: 800; margin-bottom: 0; letter-spacing: -0.5px;'>💳 Secure Payment Gateway</h1>", unsafe_allow_html=True)
+        with col_btn:
+            if st.button("← Cancel Payment"):
+                st.session_state.current_page = "checkout"
+                st.rerun()
+                
+        st.markdown("<p style='color: #475569; font-size: 1.1rem; margin-top: 5px;'>Please securely complete your payment to confirm your booking.</p>", unsafe_allow_html=True)
         
         order = st.session_state.order_details
         st.info(f"**Order ID**: {order['razorpay_order_id']}")
@@ -731,19 +1056,19 @@ else:
         passenger_email = passengers[0].get("email", "bhaskarmanikanta10@gmail.com") if passengers else "bhaskarmanikanta10@gmail.com"
         passenger_phone = passengers[0].get("phone", "9999999999") if passengers else "9999999999"
         
-        st.markdown("---")
+        st.markdown("<hr style='border-top: 1px solid #E2E8F0; margin: 30px 0;'>", unsafe_allow_html=True)
         
         # Razorpay HTML Component
         components.html(f"""
-            <button id="rzp-button1" style="background-color: #00C9FF; color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0,201,255,0.4);">💳 Pay ₹{order['amount'] / 100} with Razorpay</button>
-            <div id="status" style="margin-top: 15px; color: white; font-family: sans-serif; text-align: center;"></div>
+            <button id="rzp-button1" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color: white; border: none; padding: 16px 32px; font-size: 1.2rem; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 10px 25px rgba(37,99,235,0.3);">💳 Pay Securely ₹{order['amount'] / 100}</button>
+            <div id="status" style="margin-top: 15px; color: #475569; font-family: sans-serif; text-align: center; font-weight: 500;"></div>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
             var options = {{
                 "key": "rzp_test_T5kLvAFhsGG5fv",
                 "amount": "{order['amount']}",
                 "currency": "INR",
-                "name": "AI Flight Assistant",
+                "name": "Vyoma",
                 "description": "Flight Booking",
                 "order_id": "{order['razorpay_order_id']}",
                 "handler": function (response){{

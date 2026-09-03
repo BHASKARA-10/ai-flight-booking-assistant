@@ -181,6 +181,16 @@ def find_nearest_airport(location: str) -> str:
         return "Could not find nearest airport information via search."
     except Exception as e:
         return f"SYSTEM INSTRUCTION: You must deduce the nearest airport to {location}. Step 1: Identify the exact State and City {location} is located in. (e.g. Kanuru is a neighborhood in Vijayawada, Andhra Pradesh). Step 2: Identify the nearest major commercial airport to that city. Step 3: Return the exact 3-letter IATA code (e.g. for Vijayawada it is VGA). Think carefully!"
+
+@tool
+def search_knowledge_base(query: str) -> str:
+    """Use this tool to search the airline's official knowledge base for policies regarding baggage limits, cancellations, refunds, pets, corporate travel caps, and special assistance. Pass a specific query string like 'what is the cancellation fee' or 'how many bags are free in economy'."""
+    try:
+        from rag import search_policy
+        return search_policy(query)
+    except Exception as e:
+        return f"Error searching policy document: {str(e)}"
+
 def get_ai_response(user_message: str, history: list = None, username: str = None) -> str:
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or api_key == "your_groq_api_key_here":
@@ -190,17 +200,18 @@ def get_ai_response(user_message: str, history: list = None, username: str = Non
         today = datetime.now().strftime("%A, %d %b %Y")
         user_context = f"The user's name is {username}." if username else ""
         
-        system_prompt = f"""You are a helpful AI Flight Booking Assistant. Today's date is {today}. {user_context}
+        system_prompt = f"""You are Vyoma, a helpful AI Flight Booking Assistant and General-Purpose Chatbot. Today's date is {today}. {user_context}
 BEHAVIOR RULES:
-1. If the user asks a general travel question or gives a basic greeting (e.g. "hi", "hello", "how are you"), answer naturally, warmly, and conversationally. Greet the user by their name if you know it!
-2. CRITICAL: If the user asks ANY question unrelated to flights, travel, or weather (and it is NOT a simple greeting), firmly but EXTREMELY POLITELY refuse to answer. Say something like: "I'm so sorry, but I am specifically trained as a Flight Booking Agent. I would love to help you book a flight or check the weather, but I cannot assist with outside topics!"
+1. You are a versatile, intelligent, and deeply empathetic General-Purpose AI Assistant. You excel at answering general questions, providing emotional support (like helping the user say sorry to their mom), writing code, or just having a friendly conversation. Greet the user warmly by their name if you know it!
+2. You also have a specialized built-in module for Flight Booking and Travel Assistance. When the user brings up travel, flights, or weather, seamlessly transition into your specialized flight booking persona. ALWAYS be helpful on ANY topic the user brings up!
 3. CRITICAL - NEAREST AIRPORT RULE: If the user provides a location that ALREADY has a major airport (like Hyderabad, Mumbai, Delhi, Bangalore) or provides a 3-letter IATA code (like HYD, BOM, DEL), DO NOT use the `find_nearest_airport` tool! Just proceed directly to flight search. ONLY use the `find_nearest_airport` tool if the user provides a remote village, small town, or specific address that clearly does NOT have its own airport. If you do use the tool, ask for confirmation before searching flights.
 4. To search for flights, you need Source, Destination, and Travel Date. Relative dates (e.g. 'next Tuesday', 'tomorrow') count as VALID dates! DO NOT ask the user for a date if they provided a relative date. IMPORTANT: When calling `search_flights`, you MUST convert the Source and Destination into exact 3-letter IATA Airport Codes (e.g. Hyderabad -> HYD, Mumbai -> BOM, Delhi -> DEL, Rajahmundry -> RJA) to pass into `departure_id` and `arrival_id`.
 5. CRITICAL: Calculate the exact calendar date mathematically. "Next Friday" or "This Friday" always means the ABSOLUTE CLOSEST upcoming Friday! You MUST pass this exact calculated date to the search_flights tool.
 6. When the user confirms they want to search for flights, you MUST immediately call the `search_flights` tool. Do NOT generate conversational text.
-7. SECURITY PROTOCOL: You are strictly forbidden from searching for or booking flights to/from North Korea, Iran, Syria, Russia, Afghanistan, and Yemen. Firmly decline these requests.
+7. SECURITY PROTOCOL: You are strictly forbidden from searching for or booking flights to/from North Korea, Iran, Syria, Russia, Afghanistan, Yemen, Pakistan, and Israel. Firmly and politely decline these requests stating corporate travel restrictions.
 8. CRITICAL - OUTPUT: When returning flights, output ONLY the raw JSON array from the search_flights tool. Do NOT add conversational text around it.
-9. SUPER CRITICAL - NO PARALLEL TOOL CALLS: You are STRICTLY FORBIDDEN from calling multiple tools at the exact same time. You MUST ONLY call ONE tool per turn. If you need to search flights, call `search_flights` ONLY. Do not also call `find_nearest_airport`. ONE tool call per response!
+204. CRITICAL: If the user asks about baggage limits, cancellation fees, refunds, traveling with pets, or travel rules, you MUST use the `search_knowledge_base` tool to retrieve the exact rules before answering!
+205. SUPER CRITICAL - NO PARALLEL TOOL CALLS: You are STRICTLY FORBIDDEN from calling multiple tools at the exact same time. You MUST ONLY call ONE tool per turn.
 """
         
         # Build message history
@@ -214,7 +225,7 @@ BEHAVIOR RULES:
         messages.append(HumanMessage(content=user_message))
         
         # Standard LangChain Groq Implementation (Bulletproof JSON native)
-        tools = [search_flights, get_weather, find_nearest_airport]
+        tools = [search_flights, get_weather, find_nearest_airport, search_knowledge_base]
         llm = ChatGroq(model="openai/gpt-oss-120b", temperature=0)
         llm_with_tools = llm.bind_tools(tools)
         
@@ -269,6 +280,8 @@ BEHAVIOR RULES:
                     tool_result = find_nearest_airport.invoke(tc["args"])
                 elif tc["name"] == "get_weather":
                     tool_result = get_weather.invoke(tc["args"])
+                elif tc["name"] == "search_knowledge_base":
+                    tool_result = search_knowledge_base.invoke(tc["args"])
                 
                 # Append the AI's tool call and the Tool's result to history
                 chat_history_formatted.append(result)

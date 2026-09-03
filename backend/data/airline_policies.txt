@@ -1,0 +1,30 @@
+# AI Flight Assistant - Master Policy & FAQ
+
+## 1. Baggage Policies
+- **Economy Class:** 1 personal item (free), 1 carry-on bag (up to 7kg, free), 1 checked bag (up to 15kg, free). Extra checked bags cost ₹2000 per 5kg.
+- **Business Class:** 1 personal item (free), 2 carry-on bags (up to 10kg total, free), 2 checked bags (up to 30kg total, free).
+- **Prohibited Items:** Hoverboards, Samsung Galaxy Note 7, loose lithium batteries over 160Wh, and flammable liquids are strictly prohibited in both carry-on and checked luggage.
+- **Sporting Equipment:** Golf clubs, surfboards, and bicycles can be checked in for a flat oversized fee of ₹3500 per flight.
+
+## 2. Cancellation and Refund Policy
+- **Within 24 Hours of Booking:** 100% full refund with absolutely zero cancellation fees, regardless of ticket class.
+- **More than 7 days before departure:** Cancellation fee of ₹1500 per passenger. The remaining balance is refunded to the original payment method within 5-7 business days.
+- **Less than 7 days before departure:** Non-refundable. However, the passenger will receive a travel credit voucher for 50% of the ticket value, valid for 6 months.
+- **No-Show:** If a passenger fails to board the flight without prior cancellation, the entire ticket is forfeited. No refunds or credits will be issued.
+
+## 3. Traveling with Pets
+- **In-Cabin Pets:** Small dogs and cats (under 8kg including the carrier) are allowed in the cabin for a fee of ₹2500. The carrier must fit under the seat.
+- **Cargo Pets:** Larger pets must travel in the climate-controlled cargo hold. The fee is ₹5000. Snub-nosed breeds like Pugs and Persian cats are NOT allowed in cargo due to respiratory risks.
+
+## 4. Special Assistance & Meals
+- **Wheelchair Assistance:** Provided free of charge. Must be requested at least 48 hours prior to departure.
+- **Dietary Meals:** Vegan, Gluten-Free, and Kosher meals are available on flights longer than 3 hours. Must be selected during checkout or requested 24 hours before the flight.
+
+## 5. Check-In Guidelines
+- **Domestic Flights:** Check-in counters open 2 hours before departure and close strictly 45 minutes before departure.
+- **Web Check-In:** Available from 48 hours up to 2 hours before departure. Web check-in is mandatory; a fee of ₹200 applies for airport check-in.
+
+## 6. Corporate Travel Policy (Internal Employees)
+- **Ticket Caps:** Employees must book Economy class for flights under 6 hours. Business class is only permitted for flights exceeding 6 hours with VP approval.
+- **Maximum Spend:** Domestic flights must not exceed ₹15,000. International flights must not exceed ₹80,000 without prior written approval.
+- **Reimbursement:** Cancellation fees due to personal reasons will not be reimbursed by the company.
